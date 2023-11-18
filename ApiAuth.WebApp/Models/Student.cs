@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Text.Json.Serialization;
-
-namespace ApiAuth.WebApp.Models;
+﻿namespace ApiAuth.WebApp.Models;
 
 public record class Student
 {

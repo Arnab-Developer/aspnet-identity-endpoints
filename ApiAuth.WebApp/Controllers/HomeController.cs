@@ -1,6 +1,4 @@
 using ApiAuth.WebApp.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
 namespace ApiAuth.WebApp.Controllers
@@ -13,6 +11,14 @@ namespace ApiAuth.WebApp.Controllers
         public async Task<IActionResult> Index()
         {
             using var client = _factory.CreateClient();
+            var user = new User(_settings.Email, _settings.Password);
+            var response = await client.PostAsJsonAsync(_settings.WebApiLoginUrl, user);
+            response.EnsureSuccessStatusCode();
+
+            var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>() ??
+                throw new InvalidOperationException();
+
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {loginResponse.AccessToken}");
             var students = await client.GetFromJsonAsync<IEnumerable<Student>>(_settings.WebApiUrl);
             return View(students);
         }
