@@ -1,4 +1,5 @@
 using ApiAuth.WebApi;
+using ApiAuth.WebApi.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+//Add-Migration InitialCreate -Context ApplicationDbContext -OutputDir Migrations\Identity
 
 var app = builder.Build();
 app.MapIdentityApi<IdentityUser>();

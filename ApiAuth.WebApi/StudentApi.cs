@@ -1,4 +1,6 @@
-﻿namespace ApiAuth.WebApi;
+﻿using ApiAuth.WebApi.Contexts;
+
+namespace ApiAuth.WebApi;
 
 internal static class StudentApi
 {

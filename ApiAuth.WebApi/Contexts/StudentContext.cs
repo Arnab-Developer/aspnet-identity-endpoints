@@ -1,4 +1,4 @@
-﻿namespace ApiAuth.WebApi;
+﻿namespace ApiAuth.WebApi.Contexts;
 
 internal class StudentContext(DbContextOptions<StudentContext> options)
     : DbContext(options)
