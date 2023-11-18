@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<table border="1">
+    <tr>
+        <td>@Html.DisplayNameForInnerType((Student m) => m.Id)</td>
+        <td>@Html.DisplayNameForInnerType((Student m) => m.FirstName)</td>
+        <td>@Html.DisplayNameForInnerType((Student m) => m.LastName)</td>
+    </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.Id</td>
+            <td>@student.FirstName</td>
+            <td>@student.LastName</td>
+        </tr>
+    }
+</table>
