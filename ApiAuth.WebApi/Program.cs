@@ -1,15 +1,21 @@
 using ApiAuth.WebApi;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthorization();
 
-var constr = builder.Configuration.GetConnectionString("StudentDb");
-builder.Services.AddDbContext<StudentContext>(option => option.UseSqlServer(constr));
+var studentDb = builder.Configuration.GetConnectionString("StudentDb");
+builder.Services.AddDbContext<StudentContext>(option => option.UseSqlServer(studentDb));
+
+var identityDb = builder.Configuration.GetConnectionString("IdentityDb");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(identityDb));
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
+app.MapIdentityApi<IdentityUser>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -17,21 +23,5 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var group = app.MapGroup("/student").WithOpenApi();
-
-group.MapPost("/", async (string firstName, string lastName, StudentContext context) =>
-{
-    var student = new Student(firstName, lastName);
-    await context.Students.AddAsync(student);
-    await context.SaveChangesAsync();
-})
-.WithName("CreateStudents");
-
-group.MapGet("/", async (StudentContext context) =>
-{
-    var students = await context.Students.OrderBy(s => s.FirstName).ToListAsync();
-    return students;
-})
-.WithName("GetStudents");
-
+app.MapStudentApi();
 app.Run();
