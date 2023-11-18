@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAuth.WebApi", "ApiAuth.WebApi\ApiAuth.WebApi.csproj", "{70E40AAC-E3FF-4C24-9934-28D2661C8310}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAuth.WebApi", "ApiAuth.WebApi\ApiAuth.WebApi.csproj", "{70E40AAC-E3FF-4C24-9934-28D2661C8310}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAuth.WebApp", "ApiAuth.WebApp\ApiAuth.WebApp.csproj", "{53DAB3F1-2216-4317-B525-A7D9430793B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAuth.WebApp", "ApiAuth.WebApp\ApiAuth.WebApp.csproj", "{53DAB3F1-2216-4317-B525-A7D9430793B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1DB7140A-E2D0-47FC-90F4-AED0381A8332}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
