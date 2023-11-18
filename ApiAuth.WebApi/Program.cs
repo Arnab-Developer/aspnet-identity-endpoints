@@ -9,13 +9,11 @@ builder.Services.AddAuthorization();
 var studentDb = builder.Configuration.GetConnectionString("StudentDb");
 builder.Services.AddDbContext<StudentContext>(option => option.UseSqlServer(studentDb));
 
-var identityDb = builder.Configuration.GetConnectionString("IdentityDb");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(identityDb));
+var apiIdentityDb = builder.Configuration.GetConnectionString("ApiIdentityDb");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(apiIdentityDb));
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-
-//Add-Migration InitialCreate -Context ApplicationDbContext -OutputDir Migrations\Identity
 
 var app = builder.Build();
 app.MapIdentityApi<IdentityUser>();
