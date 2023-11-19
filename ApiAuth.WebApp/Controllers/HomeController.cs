@@ -46,7 +46,8 @@ public class HomeController(IHttpClientFactory factory, IOptionsMonitor<ApiSetti
 
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {loginResponse.AccessToken}");
         var url = $"{_settings.WebApiUrl}?firstName={student.FirstName}&lastName={student.LastName}";
-        await client.PostAsync(url, default);
+        response = await client.PostAsync(url, default);
+        response.EnsureSuccessStatusCode();
         return RedirectToAction("Index");
     }
 
