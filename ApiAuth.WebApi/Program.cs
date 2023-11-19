@@ -4,7 +4,6 @@ using ApiAuth.WebApi.Contexts;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthorization();
 
 var studentDb = builder.Configuration.GetConnectionString("StudentDb");
 builder.Services.AddDbContext<StudentContext>(option => option.UseSqlServer(studentDb));
@@ -14,6 +13,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddAuthorization(options => options.AddPolicy("Admin", policy =>
+    policy.RequireClaim("Admin")));
 
 var app = builder.Build();
 app.MapIdentityApi<IdentityUser>();
