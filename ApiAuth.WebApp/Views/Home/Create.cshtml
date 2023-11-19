@@ -1,0 +1,9 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "Create Student";
+}
+
+<form method="post" asp-controller="Home" asp-action="Create">
+    @Html.EditorForModel()
+    <input type="submit" value="Submit" />
+</form>
