@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ApiAuth.WebApp.Models;
+﻿namespace ApiAuth.WebApp.Models;
 
 public record class Student
 {
     [JsonPropertyName("id")]
+    [HiddenInput]
     public int Id { get; set; }
 
     [JsonPropertyName("firstName")]

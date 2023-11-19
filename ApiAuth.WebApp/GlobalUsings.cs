@@ -5,5 +5,6 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Options;
 global using System.ComponentModel;
+global using System.ComponentModel.DataAnnotations;
 global using System.Diagnostics;
 global using System.Text.Json.Serialization;
