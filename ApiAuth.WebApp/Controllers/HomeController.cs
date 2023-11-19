@@ -11,6 +11,8 @@ public class HomeController(IHttpClientFactory factory, IOptionsMonitor<ApiSetti
     [HttpGet]
     public async Task<IActionResult> Index()
     {
+        ViewData["UserName"] = User.Identity is not null ? User.Identity.Name : string.Empty;
+
         using var client = _factory.CreateClient();
         var user = new User(_settings.Email, _settings.Password);
         var response = await client.PostAsJsonAsync(_settings.WebApiLoginUrl, user);
@@ -20,7 +22,7 @@ public class HomeController(IHttpClientFactory factory, IOptionsMonitor<ApiSetti
             throw new InvalidOperationException();
 
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {loginResponse.AccessToken}");
-        var students = await client.GetFromJsonAsync<IEnumerable<Student>>(_settings.WebApiUrl);
+        var students = await client.GetFromJsonAsync<IEnumerable<Student>>(_settings.WebApiUrl);        
         return View(students);
     }
 
@@ -48,7 +50,7 @@ public class HomeController(IHttpClientFactory factory, IOptionsMonitor<ApiSetti
         var url = $"{_settings.WebApiUrl}?firstName={student.FirstName}&lastName={student.LastName}";
         response = await client.PostAsync(url, default);
         response.EnsureSuccessStatusCode();
-        return RedirectToAction("Index");
+        return RedirectToAction(nameof(HomeController.Index));
     }
 
     public IActionResult Privacy()

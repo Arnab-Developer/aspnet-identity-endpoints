@@ -4,15 +4,15 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Welcome @ViewData["UserName"]</p>
+    <a asp-controller="Login" asp-action="Logout">Logout</a>
 </div>
 
-<table border="1">
+<table class="table">
     <tr>
-        <td>@Html.DisplayNameForInnerType((Student m) => m.Id)</td>
-        <td>@Html.DisplayNameForInnerType((Student m) => m.FirstName)</td>
-        <td>@Html.DisplayNameForInnerType((Student m) => m.LastName)</td>
+        <th>@Html.DisplayNameForInnerType((Student m) => m.Id)</th>
+        <th>@Html.DisplayNameForInnerType((Student m) => m.FirstName)</th>
+        <th>@Html.DisplayNameForInnerType((Student m) => m.LastName)</th>
     </tr>
     @foreach (var student in Model)
     {
