@@ -8,9 +8,11 @@ internal static class StudentApi
     {
         var group = endpoints.MapGroup("/student").WithOpenApi().RequireAuthorization();
 
-        group.MapPost("/", async (string firstName, string lastName, StudentContext context) =>
+        group.MapPost("/", async (string firstName, string lastName, StudentContext context,
+            IValidator<Student> validator) =>
         {
             var student = new Student(firstName, lastName);
+            validator.ValidateAndThrow(student);
             await context.Students.AddAsync(student);
             await context.SaveChangesAsync();
         })

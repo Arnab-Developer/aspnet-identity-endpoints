@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
+builder.Services.AddSingleton<IValidator<Student>, StudentValidator>();
 
 var studentDb = builder.Configuration.GetConnectionString("StudentDb");
 builder.Services.AddDbContext<StudentContext>(option => option.UseSqlServer(studentDb));
