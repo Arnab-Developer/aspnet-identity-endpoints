@@ -1,4 +1,6 @@
-﻿namespace ApiAuth.WebApp.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ApiAuth.WebApp.Models;
 
 public record class Student
 {
@@ -7,10 +9,12 @@ public record class Student
 
     [JsonPropertyName("firstName")]
     [DisplayName("First Name")]
+    [Required(ErrorMessage = "Invalid first name")]
     public string FirstName { get; set; }
 
     [JsonPropertyName("lastName")]
     [DisplayName("Last Name")]
+    [Required(ErrorMessage = "Invalid last name")]
     public string LastName { get; set; }
 
     public Student()
