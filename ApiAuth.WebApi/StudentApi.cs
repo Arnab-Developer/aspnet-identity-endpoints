@@ -6,7 +6,7 @@ internal static class StudentApi
 {
     public static RouteGroupBuilder MapStudentApi(this IEndpointRouteBuilder endpoints)
     {
-        var group = endpoints.MapGroup("/student").WithOpenApi().RequireAuthorization("Admin");
+        var group = endpoints.MapGroup("/student").WithOpenApi().RequireAuthorization();
 
         group.MapPost("/", async (string firstName, string lastName, StudentContext context) =>
         {

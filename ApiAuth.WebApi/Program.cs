@@ -14,8 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddAuthorization(options => options.AddPolicy("Admin", policy =>
-    policy.RequireClaim("Admin")));
+builder.Services.AddAuthorization(options => options.AddPolicy("client_Admin", policy =>
+    policy.RequireClaim("client_Admin")));
 
 var app = builder.Build();
 app.MapIdentityApi<IdentityUser>();
