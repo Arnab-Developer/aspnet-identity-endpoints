@@ -6,7 +6,7 @@ internal static class StudentApi
 {
     public static RouteGroupBuilder MapStudentApi(this IEndpointRouteBuilder endpoints)
     {
-        var group = endpoints.MapGroup("/student").WithOpenApi().RequireAuthorization();
+        var group = endpoints.MapGroup("/student").WithOpenApi();
 
         group.MapPost("/", async (string firstName, string lastName, StudentContext context,
             IValidator<Student> validator) =>
@@ -16,14 +16,16 @@ internal static class StudentApi
             await context.Students.AddAsync(student);
             await context.SaveChangesAsync();
         })
-        .WithName("CreateStudents");
+        .WithName("CreateStudents")
+        .RequireAuthorization("AdminRole");
 
         group.MapGet("/", async (StudentContext context) =>
         {
             var students = await context.Students.OrderBy(s => s.FirstName).ToListAsync();
             return students;
         })
-        .WithName("GetStudents");
+        .WithName("GetStudents")
+        .RequireAuthorization();
 
         return group;
     }

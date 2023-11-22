@@ -22,7 +22,7 @@ public class HomeController(IHttpClientFactory factory, IOptionsMonitor<ApiSetti
             throw new InvalidOperationException();
 
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {loginResponse.AccessToken}");
-        var students = await client.GetFromJsonAsync<IEnumerable<Student>>(_settings.WebApiUrl);        
+        var students = await client.GetFromJsonAsync<IEnumerable<Student>>(_settings.WebApiUrl);
         return View(students);
     }
 
